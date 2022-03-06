@@ -11,8 +11,8 @@ const char* password = "111333555";  // Your WiFi Password
 const char* remote_host = "www.google.com"; //Site a ser 'pingado'
 
 
+int rssiDbm;
 #define LED 2
-
 AsyncWebServer server(80);
 
 
@@ -52,11 +52,27 @@ void setup() {
 
 void loop() {
   if (Ping.ping(remote_host)) {
+    rssiDbm = WiFi.RSSI();
     Serial.println("Success!!");
     Serial.println(WiFi.RSSI());
+    rssiCondition();
+
   } else {
     Serial.println("Error :(");
   }
-  WebSerial.println("Hello!");
-  delay(2000);
+}
+
+void rssiCondition() {
+  if (rssiDbm >= -30) {
+    WebSerial.println("Conexão ótima, de " + String(rssiDbm) + "dBm's");
+  }
+  else if(rssiDbm > -67) {
+    WebSerial.println("Conexão boa, de " + String(rssiDbm) + "dBm's");
+  }
+  else if(rssiDbm > -80) {
+    WebSerial.println("Conexão aceitável, de " + String(rssiDbm) + "dBm's");
+  }
+  else{
+    WebSerial.println("Conexão ruim, de " + String(rssiDbm) + "dBm's");
+  }
 }
