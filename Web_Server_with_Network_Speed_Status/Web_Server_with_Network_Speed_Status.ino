@@ -64,15 +64,23 @@ void loop() {
 
 void rssiCondition() {
   if (rssiDbm >= -30) {
-    WebSerial.println("Conexão ótima, de " + String(rssiDbm) + "dBm's");
+    WebSerial.println("Conexão ótima, de " + String(rssiDbm) + "dBm.");
+    WebSerial.println("Ping enviado para " + String(remote_host) + ", com tempo de resposta de " + String(Ping.averageTime()) + "ms"); 
   }
   else if(rssiDbm > -67) {
-    WebSerial.println("Conexão boa, de " + String(rssiDbm) + "dBm's");
+    WebSerial.println("Conexão boa, de " + String(rssiDbm) + "dBm.");
+    WebSerial.println("Ping enviado para " + String(remote_host) + ", com tempo de resposta de " + String(Ping.averageTime()) + "ms"); 
   }
   else if(rssiDbm > -80) {
-    WebSerial.println("Conexão aceitável, de " + String(rssiDbm) + "dBm's");
+    WebSerial.println("Conexão aceitável, de " + String(rssiDbm) + "dBm.");
+    WebSerial.println("Ping enviado para " + String(remote_host) + ", com tempo de resposta de " + String(Ping.averageTime()) + "ms"); 
   }
   else{
-    WebSerial.println("Conexão ruim, de " + String(rssiDbm) + "dBm's");
+    WebSerial.println("Conexão ruim, de " + String(rssiDbm) + "dBm.");
+    WebSerial.println("Ping enviado para " + String(remote_host) + ", com tempo de resposta de " + String(Ping.averageTime()) + "ms"); 
   }
+}
+
+void pingSpeedTest() {
+  
 }
